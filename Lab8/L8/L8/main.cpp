@@ -15,22 +15,40 @@ int main(int argc, const char * argv[]) {
     int y = 6;
     cout << x << ", " << y << endl;
     
-    auto numx = [] (int x) {return x;}(x);
-    auto numy = [] (int y) {return y;}(y);
-    cout << numx << ", " << numy << endl;
+//    auto numx = [] (int *x) {return x;}(x);
+//    auto numy = [] (int y) {return y;}(y);
+//    cout << numx << ", " << numy << endl;
+    auto number = [] (int *x, int *y) {
+        cout << "Lambda started..." << endl;
+        int a;
+        a = *x;
+        *x = *y;
+        *y = a;
+    };
+    number(&x, &y);
+    cout << "x = " << x << "\ny = " << y << endl;
     
     //2
-    auto num1 = [x] { return x; };
-    auto num2 = [y] { return y; };
-    cout << num1() << ", " << num2() << endl;
+    auto lambda = [&](){
+        cout << "Lambda started..." << endl;
+
+        int a;
+        a = x;
+        x = y;
+        y = a;
+        x++;
+        y++;
+    };
+    lambda();
+    cout << "x = " << x << "/ny = " << y << endl;
     
     //3
-    cout << "Incrementing: " << endl;
-    auto num3 = [&x] { return x; };
-    x++;
-    auto num4 = [&y] { return y; };
-    y++;
-    cout << num3() << ", " << num4() << endl << endl;
+//    cout << "Incrementing: " << endl;
+//    auto num3 = [&x] { return x; };
+//    x++;
+//    auto num4 = [&y] { return y; };
+//    y++;
+//    cout << num3() << ", " << num4() << endl << endl;
     
     //4
     
